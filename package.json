@@ -36,6 +36,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"materialize-css": "^1.0.0-rc.2"
+		"fast-xml-parser": "^4.2.7",
+		"file-system": "^2.2.2",
+		"xml2js": "^0.6.2"
 	}
 }
