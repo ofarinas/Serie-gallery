@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import type { Episode, Serie } from '$lib/components/serie.model';
 
 const serieNameIds = [
@@ -28,11 +29,13 @@ export async function loadSerieCatalog() {
 		serieCatalog.push(await loadSerie(nameId));
 	});
 	console.log('serieCatalog', serieCatalog);
+
 	return serieCatalog;
 }
 
 async function loadSerie(nameId: string): Promise<Serie> {
-	const response = await fetch(`static/${nameId}.xml`);
+	const url = dev ? `static/${nameId}.xml` : `${nameId}.xml`;
+	const response = await fetch(url);
 	const text = await response.text();
 	const xml = new window.DOMParser().parseFromString(text, 'text/xml');
 	let episodiosCollection = xml.getElementsByTagName('Episode');
@@ -55,6 +58,7 @@ function getEpisodes(episodiosCollection: HTMLCollection): Episode[] {
 			Rating: getContent(value, 'Rating')
 		} as Episode;
 	});
+
 	return episodeList;
 }
 
@@ -68,6 +72,7 @@ function getSerie(serieCollection: HTMLCollection, episodes: Episode[]): Serie {
 		SeriesName: getContent(serieXml[0], 'SeriesName'),
 		Episodes: episodes
 	};
+
 	return serie;
 }
 
