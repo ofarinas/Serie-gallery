@@ -23,12 +23,13 @@ const serieNameIds = [
 	'274431'
 ];
 
-export async function loadSerieCatalog() {
-	let serieCatalog: Serie[] = [];
-	serieNameIds.forEach(async (nameId) => {
-		serieCatalog.push(await loadSerie(nameId));
-	});
-	console.log('serieCatalog', serieCatalog);
+export async function loadSerieCatalog(): Promise<Serie[]> {
+	const serieCatalog: Serie[] = [];
+
+	for (const nameId of serieNameIds) {
+		const serie = await loadSerie(nameId);
+		serieCatalog.push(serie);
+	}
 
 	return serieCatalog;
 }

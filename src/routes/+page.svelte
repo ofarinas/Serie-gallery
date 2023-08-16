@@ -1,14 +1,75 @@
 <script lang="ts">
-	import { loadSerieCatalog } from '$lib/load/loadData.model';
-	import * as fastXmlParser from 'fast-xml-parser';
+	import { serieCatalogStore } from '$lib/components/serieCatalog.store';
 	import { onMount } from 'svelte';
 
 	onMount(async () => {
-		loadSerieCatalog();
+		await serieCatalogStore.fetch();
 	});
+
+	$: series = serieCatalogStore;
+	$: loading = serieCatalogStore.loading;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
+<h3>Welcome to The Series Catalog</h3>
 
-<!-- eslint-disable-next-line jsx-a11y/anchor-is-valid -->
-<a class="waves-effect waves-light btn">button</a>
+{#if !$loading && series}
+	<div class="flex">
+		{#each $serieCatalogStore as serie}
+			<div class="card horizontal flex-item">
+				<div class="card-image" />
+				<div class="card-stacked">
+					<div class="card-content">
+						<div>
+							<strong>id:</strong>
+							{serie.id}
+						</div>
+						<div>
+							<strong>SeriesName:</strong>
+							{serie.SeriesName}
+						</div>
+						<div>
+							<strong>Actors:</strong>
+							<span title={serie.Actors} class="overflow">{serie.Actors}</span>
+						</div>
+						<div>
+							<strong>Overview:</strong>
+							<span class="overflow" title={serie.Overview}>{serie.Overview}</span>
+						</div>
+					</div>
+					<div class="card-action">
+						<a href="#">episodes</a>
+					</div>
+				</div>
+			</div>
+		{/each}
+	</div>
+{/if}
+
+<style>
+	.flex {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 10px;
+		justify-content: center; /* Center horizontally */
+		align-items: center;
+	}
+	.flex-item {
+		flex-basis: 300px;
+		box-sizing: border-box;
+	}
+	h3 {
+		text-align: center;
+	}
+	.long-text {
+		width: 100px;
+	}
+	.overflow {
+		width: 300px;
+		display: inline-block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		vertical-align: top;
+	}
+</style>
