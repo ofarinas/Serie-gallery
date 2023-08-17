@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Load from '$lib/components/Load.svelte';
 	import { serieCatalogStore } from '$lib/components/serieCatalog.store';
 	import { onMount } from 'svelte';
 
@@ -11,8 +12,9 @@
 </script>
 
 <h3>Welcome to The Series Catalog</h3>
-
-{#if !$loading && series}
+{#if $loading}
+	<Load />
+{:else}
 	<div class="flex">
 		{#each $serieCatalogStore as serie}
 			<div class="card horizontal flex-item">
