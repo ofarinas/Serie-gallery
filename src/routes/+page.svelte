@@ -52,11 +52,11 @@
 		flex-wrap: wrap;
 		justify-content: space-between;
 		gap: 10px;
-		justify-content: center; /* Center horizontally */
+		justify-content: center;
 		align-items: center;
 	}
 	.flex-item {
-		flex-basis: 300px;
+		flex-basis: 400px;
 		box-sizing: border-box;
 	}
 	h3 {
