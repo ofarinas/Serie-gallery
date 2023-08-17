@@ -15,14 +15,17 @@ export const serieCatalogStore = {
 	fetch: async () => {
 		loading.set(true);
 		try {
-			
 			set(await loadSerieCatalog());
-            console.log('after',[{test:1},{test:1}])
+			console.log('after', [{ test: 1 }, { test: 1 }]);
 		} catch {
 			error.set(true);
 		} finally {
-            console.log('loading false')
+			console.log('loading false');
 			loading.set(false);
 		}
+	},
+	getSerie: (nameId?: string): Serie | undefined => {
+		console.log('nameid', nameId);
+		return get(serieCatalogStore).find((serie) => serie.id === nameId);
 	}
 };

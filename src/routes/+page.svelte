@@ -7,7 +7,6 @@
 		await serieCatalogStore.fetch();
 	});
 
-	$: series = serieCatalogStore;
 	$: loading = serieCatalogStore.loading;
 </script>
 
@@ -39,7 +38,7 @@
 						</div>
 					</div>
 					<div class="card-action">
-						<a href="#">episodes</a>
+						<a href={`./serie?serieId=${serie.id}`}>episodes</a>
 					</div>
 				</div>
 			</div>
