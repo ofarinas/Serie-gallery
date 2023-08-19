@@ -16,7 +16,7 @@
 	$: loading = serieCatalogStore.loading;
 </script>
 
-{#if $loading &&!serie}
+{#if $loading && !serie}
 	<Load />
 {:else}
 	<div class="container">
@@ -32,17 +32,20 @@
 					<div class="collapsible-header">{episode.EpisodeName}</div>
 					<div class="collapsible-body">
 						<h6>Overview</h6>
+						<br />
 						<div>
 							{episode.Overview}
 						</div>
-						<h6>Director</h6>
-						<div>
+						<br />
+						<h6>Director:</h6>
+						<span>
 							{episode.Director ?? '-'}
-						</div>
-						<h6>Rating</h6>
-						<div>
+						</span>
+						<br /><br />
+						<h6>Rating:</h6>
+						<span>
 							{episode.Rating}
-						</div>
+						</span>
 					</div>
 				</li>
 			{/each}
@@ -56,5 +59,8 @@
 	}
 	.back-link {
 		text-align: right;
+	}
+	h6 {
+		display: inline;
 	}
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Load from '$lib/components/Load.svelte';
+	import More from '$lib/components/More.svelte';
 	import { serieCatalogStore } from '$lib/components/serieCatalog.store';
 	import { onMount } from 'svelte';
 
@@ -21,20 +22,18 @@
 				<div class="card-stacked">
 					<div class="card-content">
 						<div>
-							<strong>id:</strong>
-							{serie.id}
-						</div>
-						<div>
 							<strong>SeriesName:</strong>
 							{serie.SeriesName}
 						</div>
 						<div>
 							<strong>Actors:</strong>
-							<span title={serie.Actors} class="overflow">{serie.Actors}</span>
+							<span title={serie.Actors.replaceAll('|', '')} class="overflow"
+								>{serie.Actors.replaceAll('|', '')}</span
+							>
 						</div>
 						<div>
 							<strong>Overview:</strong>
-							<span class="overflow" title={serie.Overview}>{serie.Overview}</span>
+							<More content={serie.Overview} />
 						</div>
 					</div>
 					<div class="card-action">
