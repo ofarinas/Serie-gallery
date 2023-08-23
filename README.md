@@ -1,9 +1,7 @@
-# overview
+# Summary
 
 The Series Catalog app allows you to view information about series and their episodes.
 
-
-```
 
 ## Developing
 
