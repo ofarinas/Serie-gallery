@@ -39,10 +39,11 @@ async function loadSerie(nameId: string): Promise<Serie> {
 	const response = await fetch(url);
 	const text = await response.text();
 	const xml = new window.DOMParser().parseFromString(text, 'text/xml');
+
 	let episodiosCollection = xml.getElementsByTagName('Episode');
-	let serieCollection = xml.getElementsByTagName('Series');
 	let episodes = getEpisodes(episodiosCollection);
 
+	let serieCollection = xml.getElementsByTagName('Series');
 	return getSerie(serieCollection, episodes);
 }
 

@@ -9,12 +9,12 @@
 	});
 
 	$: loading = serieCatalogStore.loading;
+	$: error = serieCatalogStore.error;
 </script>
 
 <h3>Welcome to The Series Catalog</h3>
-{#if $loading}
-	<Load />
-{:else}
+
+<Load loading={$loading} error={$error}>
 	<div class="flex">
 		{#each $serieCatalogStore as serie}
 			<div class="card horizontal flex-item">
@@ -43,7 +43,7 @@
 			</div>
 		{/each}
 	</div>
-{/if}
+</Load>
 
 <style>
 	.flex {

@@ -14,11 +14,10 @@
 
 	$: serieId = $page.url.searchParams.get('serieId');
 	$: loading = serieCatalogStore.loading;
+	$: error = serieCatalogStore.error;
 </script>
 
-{#if $loading && !serie}
-	<Load />
-{:else}
+<Load loading={$loading} error={$error}>
 	<div class="container">
 		<h3>Serie: {serie?.SeriesName}</h3>
 		<h6>{serie?.Episodes.length} Episodes</h6>
@@ -51,7 +50,7 @@
 			{/each}
 		</ul>
 	</div>
-{/if}
+</Load>
 
 <style>
 	.container {
