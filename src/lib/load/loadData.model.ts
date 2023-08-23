@@ -35,7 +35,6 @@ export async function loadSerieCatalog(): Promise<Serie[]> {
 }
 
 async function loadSerie(nameId: string): Promise<Serie> {
-	console.log('dev', dev);
 	const url = dev ? `static/${nameId}.xml` : `${nameId}.xml`;
 
 	const response = await fetch(url);
